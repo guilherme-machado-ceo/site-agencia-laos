@@ -43,16 +43,35 @@ Acesse: `http://localhost:8000` ou `http://localhost:8080`
 
 ## Deploy
 
-### GitHub Pages
-1. Faça push para o repositório GitHub
-2. Vá em Settings > Pages
-3. Selecione a branch main como source
-4. O site estará disponível em: `https://[username].github.io/[repository-name]`
+### GitHub Pages (Ativo)
+O site está configurado para deploy automático no GitHub Pages:
 
-### Azure Static Web Apps
-1. Conecte o repositório GitHub ao Azure
-2. Configure o build automaticamente
-3. O deploy será feito automaticamente a cada push
+1. Vá para **Settings > Pages** no seu repositório GitHub
+2. Em "Source", selecione **"GitHub Actions"**
+3. O workflow será executado automaticamente a cada push
+4. O site estará disponível em: `https://seu-usuario.github.io/nome-do-repositorio`
+
+### Azure Static Web Apps (Configuração Manual)
+Para ativar o deploy no Azure:
+
+1. **Crie um Azure Static Web App:**
+   - Acesse o [Azure Portal](https://portal.azure.com)
+   - Crie um novo "Static Web App"
+   - Conecte ao seu repositório GitHub
+   - Copie o **Deployment Token**
+
+2. **Configure o Secret no GitHub:**
+   - Vá para **Settings > Secrets and variables > Actions**
+   - Adicione um novo secret: `AZURE_STATIC_WEB_APPS_API_TOKEN`
+   - Cole o token copiado do Azure
+
+3. **Ative o workflow:**
+   - Renomeie `.github/workflows/azure-static-web-apps-disabled.yml`
+   - Para: `.github/workflows/azure-static-web-apps.yml`
+   - Faça commit das alterações
+
+4. **Desative o GitHub Pages (opcional):**
+   - Delete ou renomeie o arquivo `azure-static-web-apps.yml` atual
 
 ## Contato
 - **Agência**: Agência Laos
